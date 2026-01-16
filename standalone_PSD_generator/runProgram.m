@@ -39,6 +39,9 @@ results.u = u;
 results.v = v;
 results.k = k;
 
+% need to fix learning type error and graph labeling as axes are in the
+% wrng order and still hardcoded at UNO
+
 ternary_stable_phase_plotting(clean,results,non_CH_results,non_CH_data,...
                                   0,... 3d view 
                                   1,... vu-vec
