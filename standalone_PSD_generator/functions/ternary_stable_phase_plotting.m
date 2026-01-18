@@ -1,4 +1,4 @@
-function ternary_stable_phase_plotting(T,R,tR,tT,view3d,uv_axis,phase_display)
+function ternary_stable_phase_plotting(T,R,tR,tT,composition,view3d,uv_axis,phase_display,plotTitle)
 
     % T = table containing all data from the datapreprocessing
     % R = structure containing all teh data from the stable phase identification
@@ -67,7 +67,7 @@ function ternary_stable_phase_plotting(T,R,tR,tT,view3d,uv_axis,phase_display)
 
     % - - - - - axis, labels, chevrons, and grid generation - - - - - 
     marker_spacing = 0.1;
-    ternary_axis_generation(p,q,floor_of_plot,marker_spacing,0.1)
+    ternary_axis_generation(p,q,floor_of_plot,marker_spacing,0.1,composition)
     
     % colourbar
     cd = colorbar();
@@ -76,7 +76,8 @@ function ternary_stable_phase_plotting(T,R,tR,tT,view3d,uv_axis,phase_display)
     xlabel('u [arb. units]')
     ylabel('v [arb units]')
     zlabel('E_f [eV]')
-    title([R.learningtype,': Ternary Phase Stability Plot'])
+    title(plotTitle)
+    %title([R.learningtype,': Ternary Phase Stability Plot'])
     %ylim([q(1)-3*marker_spacing q(3)+3*marker_spacing])   % setting limits with axis() 
     %axis equal 
     
@@ -101,9 +102,9 @@ function ternary_stable_phase_plotting(T,R,tR,tT,view3d,uv_axis,phase_display)
     
     hold off
     
-    disp(['Stable Phases identified via ',R.learningtype,' learning:'])
+    disp('Stable Phases identified:')
     disp(T(R.spid,"Ef_eV"))
-    disp(['Metastable Phases identified via ',R.learningtype,' learning:'])
+    disp('Metastable Phases identified:')
     disp(T(R.mspid,"Ef_eV"))
     
 end

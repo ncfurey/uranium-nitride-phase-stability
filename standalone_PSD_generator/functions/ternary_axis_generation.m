@@ -1,4 +1,6 @@
-function ternary_axis_generation(p,q,floor_of_plot,marker_spacing,vertex_spacing)
+function ternary_axis_generation(p,q,floor_of_plot,marker_spacing,vertex_spacing,composition)
+
+% ORIGINALLY HARDCODED FOR UNO TERNARY PLOT, REWRITING TO GENERALISE
 
     % our pure phases will be always atthe points we use to define our variable change
     vertexs = [p(end-2), q(end-2);    % N
@@ -36,18 +38,18 @@ function ternary_axis_generation(p,q,floor_of_plot,marker_spacing,vertex_spacing
     axis_labels = [mean(vertexs(1:2,1)), mean(vertexs(1:2,2)) - 2*marker_spacing;
                    mean(vertexs(2:3,1))+2*marker_spacing*sin(pi/6), mean(vertexs(2:3,2))+2*marker_spacing*cos(pi/6); 
                    mean(vertexs(3:4,1))-2*marker_spacing*sin(pi/6), mean(vertexs(3:4,2))+2*marker_spacing*cos(pi/6)];
-    text(axis_labels(1,1),axis_labels(1,2),floor_of_plot,'U_xN_x_-_1', 'FontSize',14, 'HorizontalAlignment','center')
-    text(axis_labels(2,1),axis_labels(2,2),floor_of_plot,'U_yO_y_-_1', 'FontSize',14, 'HorizontalAlignment','left')
-    text(axis_labels(3,1),axis_labels(3,2),floor_of_plot,'N_zO_z_-_1', 'FontSize',14, 'HorizontalAlignment','right')
+    text(axis_labels(1,1),axis_labels(1,2),floor_of_plot,[composition(1),'_x',composition(2),'_x_-_1'], 'FontSize',14, 'HorizontalAlignment','center')   % fix
+    text(axis_labels(2,1),axis_labels(2,2),floor_of_plot,[composition(2),'_z',composition(3),'_z_-_1'], 'FontSize',14, 'HorizontalAlignment','left')
+    text(axis_labels(3,1),axis_labels(3,2),floor_of_plot,[composition(1),'_y',composition(3),'_y_-_1'], 'FontSize',14, 'HorizontalAlignment','right')
     
     % vertex labels
     %vertex_spacing = 0.05; % adding some room between vertexes and their labels
     vertex_labels = [vertexs(1,1)-vertex_spacing*cos(pi/6),vertexs(1,2)-vertex_spacing*sin(pi/6), floor_of_plot;
                      vertexs(2,1)+vertex_spacing*cos(pi/6),vertexs(2,2)-vertex_spacing*sin(pi/6), floor_of_plot;
                      vertexs(3,1)                         ,vertexs(3,2)+vertex_spacing          , floor_of_plot];
-    text(vertex_labels(1,1),vertex_labels(1,2),vertex_labels(1,3), 'N','FontSize',14,'HorizontalAlignment','center')
-    text(vertex_labels(2,1),vertex_labels(2,2),vertex_labels(2,3), 'U','FontSize',14,'HorizontalAlignment','center')
-    text(vertex_labels(3,1),vertex_labels(3,2),vertex_labels(3,3), 'O','FontSize',14,'HorizontalAlignment','center')
+    text(vertex_labels(1,1),vertex_labels(1,2),vertex_labels(1,3), composition(1),'FontSize',14,'HorizontalAlignment','center')
+    text(vertex_labels(2,1),vertex_labels(2,2),vertex_labels(2,3), composition(2),'FontSize',14,'HorizontalAlignment','center')
+    text(vertex_labels(3,1),vertex_labels(3,2),vertex_labels(3,3), composition(3),'FontSize',14,'HorizontalAlignment','center')
     
     % gridlines
     % go from n in 1 marker array to end -n in the subsequent marker array
