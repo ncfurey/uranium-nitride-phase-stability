@@ -3,3 +3,5 @@
 *.asv
 *.mp4
 */*.mp4
+data/*
+data\*
