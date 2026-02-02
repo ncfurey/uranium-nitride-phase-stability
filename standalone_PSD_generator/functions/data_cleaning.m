@@ -2,14 +2,17 @@ function clean = data_cleaning(filename,composition)
 
 data = readtable(['input\',filename]);
 data = unique([data(:,"formula"),data(:,"Ef")]);       % triming down unnescesary cols cols and removing dupe rows
+
 % the unique function doesnt always work due to floating point error so we
 % define a new unique function based off of the "formula" value
 rm_rows = zeros(height(data),1);
 for i = 2:height(data)
-    if strcmp(data(i,"formula"),data(i-1,"formula"))
+    %disp(char(data.formula(i)))
+    if strcmp(char(data.formula(i)),char(data.formula(i-1)))
         rm_rows(i) = 1;
     end
 end
+
 data(logical(rm_rows),:) = [];
 
 pure_entry1 = table(1,0,0,0,VariableNames={composition(1),composition(2),composition(3),'Ef_eV'}, RowNames={composition(1)});

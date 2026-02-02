@@ -6,3 +6,5 @@
 data/*
 data\*
 mp_UNO_data.csv
+standalone_PSD_generator\data\*
+standalone_PSD_generator/data/*
